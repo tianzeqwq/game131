@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bii8e1h2xubq4"]
+
+[ext_resource type="Script" uid="uid://4s786x3xjm48" path="res://world/in_game_menu.gd" id="1_qb0we"]
+[ext_resource type="Shader" uid="uid://bep1wej52g43" path="res://world/tscn/in_game_menu.gdshader" id="2_d6cid"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywlpr"]
+shader = ExtResource("2_d6cid")
+shader_parameter/blur_amount = 2.50000011875
+shader_parameter/tint_color = Color(0.05, 0.08, 0.12, 0.65)
+
+[node name="InGameMenu" type="Control" unique_id=919950048]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qb0we")
+
+[node name="BackgroundBlur" type="ColorRect" parent="." unique_id=423360001]
+material = SubResource("ShaderMaterial_ywlpr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuMargin" type="MarginContainer" parent="." unique_id=1967144184]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxLayout" type="HBoxContainer" parent="MenuMargin" unique_id=1754279259]
+layout_mode = 2
+
+[node name="MenuListVBox" type="VBoxContainer" parent="MenuMargin/HBoxLayout" unique_id=978305715]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MapBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=29686809]
+unique_name_in_owner = true
+layout_mode = 2
+text = "地图"
+
+[node name="BagBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=484275801]
+layout_mode = 2
+text = "背包"
+
+[node name="CharBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=1340559656]
+layout_mode = 2
+text = "角色"
+
+[node name="TeamBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=721582170]
+layout_mode = 2
+text = "队伍"
+
+[node name="SkillBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=1565936166]
+layout_mode = 2
+text = "技能"
+
+[node name="HealBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=62148087]
+layout_mode = 2
+text = "治疗技能"
+
+[node name="QuestBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=1030989264]
+layout_mode = 2
+text = "任务"
+
+[node name="GuideBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=1991875284]
+layout_mode = 2
+text = "说明"
+
+[node name="InfoPanelScroll" type="ScrollContainer" parent="MenuMargin/HBoxLayout" unique_id=2027995991]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContentLabel" type="Label" parent="MenuMargin/HBoxLayout/InfoPanelScroll" unique_id=1062272402]
+unique_name_in_owner = true
+layout_mode = 2

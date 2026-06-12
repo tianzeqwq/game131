@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://rh0btlweyrc3"]
 
+[ext_resource type="PackedScene" uid="uid://bii8e1h2xubq4" path="res://world/tscn/in_game_menu.tscn" id="1_i1kf8"]
 [ext_resource type="Script" uid="uid://bshmloawetydu" path="res://world/tscn/CameraFollow.gd" id="1_sybql"]
 [ext_resource type="MeshLibrary" uid="uid://c7x3uyflvo6cp" path="res://world/tscn/world_tiles.tres" id="1_wnqbu"]
 [ext_resource type="Script" uid="uid://bopos6hjo5udw" path="res://world/tscn/cat.gd" id="3_5c3v5"]
@@ -332,3 +333,7 @@ shape = SubResource("SphereShape3D_6c4wa")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_plj0v")
 autoplay = "default"
+
+[node name="InGameMenu" parent="." unique_id=919950048 instance=ExtResource("1_i1kf8")]
+
+[editable path="InGameMenu"]
