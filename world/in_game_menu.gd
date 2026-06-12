@@ -1,6 +1,6 @@
 extends Control
 
-# 使用唯一节点访问（请在编辑器里把这两个容器右键勾选“作为唯一名称访问”）
+# 使用唯一节点访问（请在编辑器里将新增的 LoadBtn 和 ExitBtn 右键勾选“作为唯一名称访问”）
 @onready var menu_list_vbox: VBoxContainer = %MenuListVBox
 @onready var content_label: Label = %ContentLabel
 @onready var first_button: Button = %MapBtn
@@ -9,7 +9,7 @@ func _ready() -> void:
 	# 1. 游戏内菜单打开时，默认让第一个按钮（地图）获取焦点
 	first_button.grab_focus()
 	
-	# 2. 动态遍历这8个功能按钮，绑定高亮、失去高亮以及点击信号
+	# 2. 动态遍历这 10 个功能按钮，绑定高亮、失去高亮以及点击信号
 	for child in menu_list_vbox.get_children():
 		if child is Button:
 			child.mouse_entered.connect(_on_menu_hovered.bind(child))
@@ -23,6 +23,12 @@ func _ready() -> void:
 
 # 🎯 动效博弈：选中菜单时向右滑动，并动态刷新右侧的测试面板内容
 func _on_menu_hovered(btn: Button) -> void:
+	# 💡 【核心修复】如果当前按钮没有焦点，强制让它夺取焦点！
+	# 这样可以立刻解除上一个按钮（比如地图）的焦点状态，让上一个按钮触发 _on_menu_unhovered 缩回去
+	if not btn.has_focus():
+		btn.grab_focus()
+		return # 抢到焦点后会再次触发 focus_entered，所以直接返回，避免 Tween 重复播放
+
 	btn.set("theme_override_constants/outline_size", 0)
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(btn, "position:x", 25.0, 0.12) # 向右平滑移出一点
@@ -31,7 +37,7 @@ func _on_menu_hovered(btn: Button) -> void:
 	var neon_cyan = Color(0.0, 2.5, 2.5, 1.0)
 	tween.tween_property(btn, "modulate", neon_cyan, 0.12)
 	
-	# 【八方旅人核心体验】当手柄/键盘滑到某个菜单时，右侧内容实时联动预览
+	# 当手柄/键盘滑到某个菜单时，右侧内容实时联动预览
 	_update_right_panel_preview(btn.name)
 
 func _on_menu_unhovered(btn: Button) -> void:
@@ -39,11 +45,13 @@ func _on_menu_unhovered(btn: Button) -> void:
 	tween.tween_property(btn, "position:x", 0.0, 0.12) # 缩回原位
 	tween.tween_property(btn, "modulate", Color.WHITE, 0.12)
 
-# 🖥️ 右侧面板实时预览内容控制
+# 🖥️ 右侧面板实时预览内容控制（已补齐新增按钮的预览文本）
 func _update_right_panel_preview(menu_name: String) -> void:
 	match menu_name:
 		"MapBtn":
 			content_label.text = "[ 地图 ]\n\n查看地图"
+		"LoadBtn":
+			content_label.text = "[ 读取存档 ]\n\n重新加载最近一次保存的数据。\n\n⚠️ 警告：当前未保存的进度将会丢失。"
 		"BagBtn":
 			content_label.text = "[ 背包 ]\n\n查看你背包"
 		"CharBtn":
@@ -58,17 +66,21 @@ func _update_right_panel_preview(menu_name: String) -> void:
 			content_label.text = "[ 任务日志 ]\n\n查看任务详情"
 		"GuideBtn":
 			content_label.text = "[ 教学和说明 ]\n\n查看说明和教学"
+		"ExitBtn":
+			content_label.text = "[ 退出游戏 ]\n\n退出游戏"
 
-# 🛠️ 按钮实际点击确认事件（未来你们可以在这里打开独立的二级子弹窗）
+# 🛠️ 按钮实际点击确认事件
 func _on_menu_pressed(menu_name: String) -> void:
-	print("你点击了功能: ", menu_name, "，正在调取二级数据子场景...")
+	print("你点击了功能: ", menu_name)
 	match menu_name:
-		"MapBtn":
-			pass # 比如：加载具体的地图 UI 子组件
-		"HealBtn":
-			pass # 比如：弹出快捷使用恢复道具的界面
+		"LoadBtn":
+			print("【系统】正在安全调取底层存档...")
+			# 这里预留给你们小队的程序A未来对接具体的读档逻辑
+		"ExitBtn":
+			print("【系统】切断连接，正在安全关闭游戏进程...")
+			get_tree().quit() # 退出整个游戏
 
-# 🎨 纯代码动态样式注入（确保样式和之前的主菜单风格统一）
+# 🎨 纯代码动态样式注入
 func _beautify_in_game_menu() -> void:
 	menu_list_vbox.custom_minimum_size = Vector2(240, 0) # 锁死左侧菜单宽度
 	
@@ -76,7 +88,7 @@ func _beautify_in_game_menu() -> void:
 		if child is Button:
 			child.add_theme_font_size_override("font_size", 28)
 			child.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			child.custom_minimum_size = Vector2(0, 60) # 按钮高度，方便按压
+			child.custom_minimum_size = Vector2(0, 55) # 💡 高度稍微收紧到55，保证 10 个按钮能在各种屏幕完美排开
 			
 			# 清空垃圾灰色背景，保持透明扁平赛博风
 			var style_empty = StyleBoxEmpty.new()
@@ -112,4 +124,3 @@ func toggle_menu() -> void:
 		# 2. 只有在菜单打开时，才强行抢占输入焦点到第一个按钮
 		if first_button:
 			first_button.grab_focus()
-	

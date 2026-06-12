@@ -53,6 +53,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "地图"
 
+[node name="LoadBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=398627844]
+unique_name_in_owner = true
+layout_mode = 2
+text = "加载存档"
+
 [node name="BagBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=484275801]
 layout_mode = 2
 text = "背包"
@@ -80,6 +85,11 @@ text = "任务"
 [node name="GuideBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=1991875284]
 layout_mode = 2
 text = "说明"
+
+[node name="ExitBtn" type="Button" parent="MenuMargin/HBoxLayout/MenuListVBox" unique_id=909910486]
+unique_name_in_owner = true
+layout_mode = 2
+text = "退出游戏"
 
 [node name="InfoPanelScroll" type="ScrollContainer" parent="MenuMargin/HBoxLayout" unique_id=2027995991]
 layout_mode = 2
