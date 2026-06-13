@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillConfig" format=3]
+
+[ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+skill_name = "超频冲击"
+damage_type = "physical"
+damage_multiplier = 40.0
+accuracy = 0.95
+hit_mode = "single"
+heat_generated = 35.0
+requires_target = true

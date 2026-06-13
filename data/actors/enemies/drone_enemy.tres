@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://xmtdqxwmmorc"]
+
+[ext_resource type="Texture2D" uid="uid://lb53oxutd0yb" path="res://assets/sprites/characters/drone/drone.png" id="1_njmuu"]
+[ext_resource type="Script" uid="uid://deudj6r1nbjgu" path="res://src/data/enemy_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c6pfjtp50l5vi" path="res://assets/sprites/characters/drone/drone_avatar.png" id="1_vmg63"]
+[ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="4_y4c2k"]
+[ext_resource type="Resource" path="res://data/skills/basic_attack_physical.tres" id="5_skill_atk"]
+
+[resource]
+script = ExtResource("1_script")
+unit_name = "巡逻无人机"
+idle_sprite = ExtResource("1_njmuu")
+avatar = ExtResource("1_vmg63")
+max_hp = 60.0
+hp = 60.0
+phys_atk = 12.0
+max_shield_points = 2
+shield_points = 2
+max_firewall_hp = 30.0
+firewall_hp = 30.0
+weaknesses = Array[String](["physical", "digital"])
+money = 150
+skills = [ExtResource("5_skill_atk")]

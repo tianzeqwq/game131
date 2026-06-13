@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bsf37hlj2kjk4"]
+
+[node name="TimelineDivider" type="ColorRect"]
+custom_minimum_size = Vector2(90, 48)
+size = Vector2(90, 48)
+color = Color(0.3, 0.8, 1.0, 0.15)
+mouse_filter = 2
+
+[node name="VLine" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 2.0
+offset_bottom = 48.0
+color = Color(0.3, 0.8, 1.0, 0.6)
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 14.0
+theme_override_colors/font_color = Color(0.3, 0.8, 1.0, 0.8)
+theme_override_font_sizes/font_size = 12
+text = "下一回合"

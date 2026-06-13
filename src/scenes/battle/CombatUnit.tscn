@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://btl6v7p7o6r5j"]
+
+[ext_resource type="Script" path="res://src/scenes/battle/CombatUnit.gd" id="1_script"]
+
+[node name="CombatUnit" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+shaded = false
+texture_filter = 0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillConfig" format=3]
+
+[ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+skill_name = "物理攻击"
+damage_type = "physical"
+damage_multiplier = 1.0
+accuracy = 0.95
+hit_mode = "linear"
+heat_generated = 0.0
+requires_target = true

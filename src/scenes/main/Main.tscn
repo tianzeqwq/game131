@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dcuawk2w4y5pv"]
+
+[ext_resource type="Script" uid="uid://b3hw5wex7kvqk" path="res://src/scenes/main/Main.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://deudj6r1nbjgu" path="res://src/data/character_stats.gd" id="2"]
+[ext_resource type="Resource" uid="uid://bd874c067ec8q" path="res://data/actors/players/hacker_player.tres" id="4_player"]
+[ext_resource type="Resource" uid="uid://xmtdqxwmmorc" path="res://data/actors/enemies/drone_enemy.tres" id="5_enemy"]
+[ext_resource type="PackedScene" path="res://src/scenes/battle/battle_scene.tscn" id="9_battle"]
+
+[node name="Main" type="Node3D" unique_id=466919227]
+script = ExtResource("1_script")
+player_stats_templates = Array[ExtResource("2")]([ExtResource("4_player"), ExtResource("4_player"), ExtResource("4_player")])
+enemy_stats_templates = Array[ExtResource("2")]([ExtResource("5_enemy"), ExtResource("5_enemy"), ExtResource("5_enemy")])
+
+[node name="BattleScene" parent="." unique_id=1494468967 instance=ExtResource("9_battle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4815929, 0.3592627, -0.039589047)

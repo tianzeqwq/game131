@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://timelinebar"]
+
+[ext_resource type="Script" path="res://src/ui/timeline_bar.gd" id="1_script"]
+
+[node name="TimelineBar" type="Control"]
+script = ExtResource("1_script")
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 1020.0
+offset_bottom = 70.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 0
+theme_override_constants/separation = 4
