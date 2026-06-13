@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jld2mx6ugwen"]
 
-[ext_resource type="Script" uid="uid://byl4kmaxffycq" path="res://world/tscn/main_menu.gd" id="1_c1y7e"]
+[ext_resource type="Script" uid="uid://byl4kmaxffycq" path="res://menu/main_menu.gd" id="1_c1y7e"]
 [ext_resource type="Texture2D" uid="uid://27uwso4e63fc" path="res://world/images/ChatGPT Image 2026年6月11日 20_11_07.png" id="2_3lw0d"]
 [ext_resource type="AudioStream" uid="uid://bp4kwhp4b2h5" path="res://world/BGM/Neon Vinyl Rain，钢琴爵士.mp3" id="2_tvtor"]
 
