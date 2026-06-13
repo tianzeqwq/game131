@@ -107,10 +107,7 @@ func _beautify_in_game_menu() -> void:
 	content_label.add_theme_color_override("font_color", Color(0.9, 0.9, 1.0, 0.9))
 	
 
-func _unhandled_input(event: InputEvent) -> void:
-	# 监听按键：当玩家按下 ESC 键（ui_cancel 默认绑定了键盘 ESC 和手柄的 Start/Back）
-	if event.is_action_pressed("ui_cancel"):
-		toggle_menu()
+
 
 func toggle_menu() -> void:
 	# 1. 用标准的 if-else 切换显示状态与大世界暂停状态，防止三元表达式报错

@@ -40,9 +40,9 @@ battle.queue_free()
 
 ```gdscript
 {
-    "won": true/false,      # 玩家是否获胜
-    "money": 150,           # 获得金币
-    "drops": ["道具A"],     # 掉落物品
+	"won": true/false,      # 玩家是否获胜
+	"money": 150,           # 获得金币
+	"drops": ["道具A"],     # 掉落物品
 }
 ```
 
@@ -58,9 +58,9 @@ BattleScene (Node3D)
 │   ├── PlayerSpawns    ← 玩家出生点 (Marker3D ×4)
 │   └── EnemySpawns     ← 敌人出生点 (Marker3D ×4)
 └── CanvasLayer/UI
-    ├── CombatLog
-    ├── TimelineBar
-    └── (运行时生成 HUD)
+	├── CombatLog
+	├── TimelineBar
+	└── (运行时生成 HUD)
 ```
 
 出生点位置由场景中 Marker3D 决定，无需硬编码。

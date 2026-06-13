@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cyberpath Traveler"
-run/main_scene="res://src/scenes/main/Main.tscn"
+run/main_scene="uid://jld2mx6ugwen"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 config/main_scene="res://src/scenes/main/Main.tscn"
@@ -19,6 +19,7 @@ config/main_scene="res://src/scenes/main/Main.tscn"
 [autoload]
 
 CombatEventBus="*res://src/battle/event_bus.gd"
+GlobalMenu="*uid://cxo2evxcpd7pk"
 
 [display]
 
