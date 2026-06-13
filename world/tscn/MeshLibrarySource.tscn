@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://y676rboyq0s7"]
+
+[ext_resource type="PackedScene" uid="uid://bxptg36cl8f17" path="res://world/GLB/GLB format/block-grass.glb" id="1_jiixi"]
+[ext_resource type="PackedScene" uid="uid://caosv3rnxg8gr" path="res://world/GLB/GLB format/block-moving-blue.glb" id="2_ko018"]
+[ext_resource type="PackedScene" uid="uid://cf7lhwmfvrdf1" path="res://world/GLB/GLB format/rocks.glb" id="3_qrd61"]
+[ext_resource type="PackedScene" uid="uid://cisb2o6u0i40l" path="res://world/GLB/GLB format/tree.glb" id="4_cxuiu"]
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_6h8x6"]
+
+[node name="MeshLibrarySource" type="Node3D" unique_id=361574866]
+
+[node name="GrassTile" type="GridMap" parent="." unique_id=680786308]
+visible = false
+mesh_library = SubResource("MeshLibrary_6h8x6")
+
+[node name="block-grass" parent="GrassTile" unique_id=773854624 instance=ExtResource("1_jiixi")]
+
+[node name="RoadTile" type="GridMap" parent="." unique_id=1469823934]
+visible = false
+
+[node name="block-moving-blue2" parent="RoadTile" unique_id=1646439690 instance=ExtResource("2_ko018")]
+
+[node name="Rock" type="GridMap" parent="." unique_id=1258435155]
+
+[node name="rocks2" parent="Rock" unique_id=997738888 instance=ExtResource("3_qrd61")]
+
+[node name="Tree" type="GridMap" parent="." unique_id=1454733821]
+visible = false
+
+[node name="tree2" parent="Tree" unique_id=594824627 instance=ExtResource("4_cxuiu")]

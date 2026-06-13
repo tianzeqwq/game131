@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://jld2mx6ugwen"]
+
+[ext_resource type="Script" uid="uid://byl4kmaxffycq" path="res://menu/main_menu.gd" id="1_c1y7e"]
+[ext_resource type="Texture2D" uid="uid://27uwso4e63fc" path="res://world/images/ChatGPT Image 2026年6月11日 20_11_07.png" id="2_3lw0d"]
+[ext_resource type="AudioStream" uid="uid://bp4kwhp4b2h5" path="res://world/BGM/Neon Vinyl Rain，钢琴爵士.mp3" id="2_tvtor"]
+
+[sub_resource type="Environment" id="Environment_6c4wa"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="MainMenu" type="Control" unique_id=1105537290]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c1y7e")
+
+[node name="MenuBGM" type="AudioStreamPlayer" parent="." unique_id=481855961]
+unique_name_in_owner = true
+stream = ExtResource("2_tvtor")
+volume_db = -5.0
+autoplay = true
+
+[node name="Background" type="TextureRect" parent="." unique_id=2102560457]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3lw0d")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=896955662]
+environment = SubResource("Environment_6c4wa")
+
+[node name="UIMargin" type="MarginContainer" parent="." unique_id=234233240]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+
+[node name="MenuLayout" type="Control" parent="UIMargin" unique_id=137702478]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="UIMargin/MenuLayout" unique_id=1198770701]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "赛博朋克八方旅人"
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="UIMargin/MenuLayout" unique_id=1330051214]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -274.0
+offset_right = 128.0
+offset_bottom = 274.0
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UIMargin/MenuLayout/ButtonsVBox" unique_id=906102527]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartBtn" type="Button" parent="UIMargin/MenuLayout/ButtonsVBox" unique_id=199817975]
+unique_name_in_owner = true
+layout_mode = 2
+text = "开始"
+
+[node name="LoadBtn" type="Button" parent="UIMargin/MenuLayout/ButtonsVBox" unique_id=677401580]
+layout_mode = 2
+text = "读取"
+
+[node name="SettingBtn" type="Button" parent="UIMargin/MenuLayout/ButtonsVBox" unique_id=1561101882]
+layout_mode = 2
+text = "设置"
+
+[node name="ExitBtn" type="Button" parent="UIMargin/MenuLayout/ButtonsVBox" unique_id=527602381]
+layout_mode = 2
+text = "退出"

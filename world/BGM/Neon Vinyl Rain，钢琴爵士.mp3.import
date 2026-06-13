@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bp4kwhp4b2h5"
+path="res://.godot/imported/Neon Vinyl Rain，钢琴爵士.mp3-a1561d49c16c3c54f9dc4db36ae06d44.mp3str"
+
+[deps]
+
+source_file="res://world/BGM/Neon Vinyl Rain，钢琴爵士.mp3"
+dest_files=["res://.godot/imported/Neon Vinyl Rain，钢琴爵士.mp3-a1561d49c16c3c54f9dc4db36ae06d44.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
