@@ -1,6 +1,22 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/ios/
 
-# Design documents (not part of source code)
-plan/
+# Design documents
+plans/
+
+# IDE / Editor config
+.roo/
+
+# OS junk files
+Thumbs.db
+.DS_Store
+$null
+
+# Generated/temporary files
+conversations_extracted.json
+extract_conversations.py
+
+# Log files
+*.log

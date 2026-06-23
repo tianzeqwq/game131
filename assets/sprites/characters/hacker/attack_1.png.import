@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1s16bl3us58x"
-path="res://.godot/imported/hacker_avatar.png-3e8317879611952390b42f288d0db220.ctex"
+uid="uid://dv4bjxmchc4a1"
+path="res://.godot/imported/attack_1.png-81bc8ecafc0e9776ef2e7a344957410c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/hacker/hacker_avatar.png"
-dest_files=["res://.godot/imported/hacker_avatar.png-3e8317879611952390b42f288d0db220.ctex"]
+source_file="res://assets/sprites/characters/hacker/attack_1.png"
+dest_files=["res://.godot/imported/attack_1.png-81bc8ecafc0e9776ef2e7a344957410c.ctex"]
 
 [params]
 

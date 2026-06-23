@@ -5,9 +5,14 @@
 [resource]
 script = ExtResource("1")
 skill_name = "超频冲击"
-damage_type = "physical"
+description = "超载系统对敌方单体造成巨额数字伤害。消耗大量热量。"
+damage_type = "digital"
 damage_multiplier = 40.0
 accuracy = 0.95
 hit_mode = "single"
+target_type = "single"
+random_hit_count = 1
+boost_limit = 3
+boost_effect = "damage"
 heat_generated = 35.0
 requires_target = true

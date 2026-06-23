@@ -14,10 +14,12 @@ class_name CharacterStats
 signal stats_changed
 
 @export var unit_name: String = "Unit"
-@export var idle_sprite: Texture2D
-@export var attack_sprite: Texture2D
 
-## 头像图标（用于 UI 行动轴 TimelineBar 的小头像）
+## 帧动画资源。使用 Godot 内置 SpriteFrames 编辑器创建，保存为 .tres 文件。
+## 动画轨道命名约定：idle(循环) / attack / hit / death
+@export var sprite_frames: SpriteFrames
+
+## 头像图标（用于 UI 行动轴 TimelineBar 显示）
 @export var avatar: Texture2D
 
 @export_group("Resources")

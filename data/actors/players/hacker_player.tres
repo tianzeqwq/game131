@@ -1,22 +1,21 @@
-[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://bd874c067ec8q"]
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bd874c067ec8q"]
 
-[ext_resource type="Script" uid="uid://deudj6r1nbjgu" path="res://src/data/player_stats.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://1s16bl3us58x" path="res://assets/sprites/characters/hacker/hacker_avatar.png" id="2_pyvgh"]
-[ext_resource type="Texture2D" uid="uid://l4727olmts2g" path="res://assets/sprites/characters/hacker/character.png" id="2_sprite"]
-[ext_resource type="Texture2D" uid="uid://bhaq3t4poernv" path="res://assets/sprites/characters/hacker/character_attack.png" id="3_sprite"]
+[ext_resource type="Script" uid="uid://deudj6r1nbjgu" path="res://src/data/character_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://vw8emshqllux" path="res://assets/sprites/characters/hacker/avatar.png" id="2_avatar"]
+[ext_resource type="SpriteFrames" path="res://data/animations/hacker_sprites.tres" id="4_spriteframes"]
 [ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="5_ffk5p"]
 [ext_resource type="Resource" path="res://data/skills/basic_hack_digital.tres" id="6_skill_hack"]
 [ext_resource type="Resource" path="res://data/skills/overdrive_skill.tres" id="7_skill_overdrive"]
+[ext_resource type="Resource" path="res://data/skills/virus_spread.tres" id="8_skill_virus"]
+[ext_resource type="Resource" path="res://data/skills/data_storm.tres" id="9_skill_storm"]
 
 [resource]
 script = ExtResource("1_script")
 unit_name = "黑客·零"
-idle_sprite = ExtResource("2_sprite")
-attack_sprite = ExtResource("3_sprite")
-avatar = ExtResource("2_pyvgh")
+sprite_frames = ExtResource("4_spriteframes")
+avatar = ExtResource("2_avatar")
 phys_atk = 8.0
 digi_atk = 20.0
+skills = Array[ExtResource("5_ffk5p")]([ExtResource("6_skill_hack"), ExtResource("7_skill_overdrive"), ExtResource("8_skill_virus"), ExtResource("9_skill_storm")])
 speed = 12
 weaknesses = Array[String](["digital"])
-skills = [ExtResource("6_skill_hack"), ExtResource("7_skill_overdrive")]
-hacking_intensity = 15.0

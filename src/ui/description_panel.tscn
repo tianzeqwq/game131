@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://description_panel_new"]
+
+[ext_resource type="Script" path="res://src/ui/description_panel.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="desc_bg"]
+bg_color = Color(0.03, 0.03, 0.1, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.7, 0.95, 0.5)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+
+[node name="DescriptionPanel" type="Panel"]
+script = ExtResource("1")
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 280.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("desc_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap_mode = 1
+text = ""
