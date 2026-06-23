@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" uid="uid://b06q4t6o0ddog" path="res://assets/sprites/characters/hacker/idle_0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://syc2hujedfmv" path="res://assets/sprites/characters/hacker/attack_0.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bkmxn75j3rnyu" path="res://assets/sprites/characters/hacker/attack_1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://mlp1064xq480" path="res://assets/sprites/characters/hacker/attack_2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bjwai4y3mgfg4" path="res://assets/sprites/characters/hacker/attack_3.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dad3jrrd8mmeu" path="res://assets/sprites/characters/hacker/attack_4.png" id="6"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
+"loop": true,
+"name": "idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}],
+"loop": false,
+"name": "attack",
+"speed": 4.0
+}]

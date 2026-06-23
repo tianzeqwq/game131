@@ -5,9 +5,14 @@
 [resource]
 script = ExtResource("1")
 skill_name = "物理攻击"
+description = "用近战武器对敌方单体发动物理攻击。增幅可增加攻击段数。"
 damage_type = "physical"
 damage_multiplier = 1.0
 accuracy = 0.95
 hit_mode = "linear"
+target_type = "single"
+random_hit_count = 1
+boost_limit = 3
+boost_effect = "hits"
 heat_generated = 0.0
 requires_target = true

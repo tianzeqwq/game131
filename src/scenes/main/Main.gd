@@ -22,5 +22,9 @@ func _ready():
 	var battle_scene = $BattleScene as BattleScene
 	battle_scene.init_battle(player_stats_templates, enemy_stats_templates)
 	battle_scene.start_fight()
-	await battle_scene.battle_finished
-	print("战斗测试结束")
+	var result = await battle_scene.battle_finished
+	GameLogger.info("flow", "战斗测试结束 — 胜败: %s, 金钱: %d, 掉落: %s" % [
+		"胜利" if result.get("won", false) else "失败",
+		result.get("money", 0),
+		", ".join(result.get("drops", [])) if result.get("drops", []).size() > 0 else "无"
+	])

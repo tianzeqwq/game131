@@ -150,6 +150,13 @@ func take_damage(damage_result: DamageResult, damage_type: String, attacker_name
 	# ----- HP 扣减 -----
 	hp -= damage_result.effective_damage
 
+	# ----- 触发受击/死亡动画（fire-and-forget，不阻塞伤害流程）-----
+	if visual_unit and is_instance_valid(visual_unit):
+		if hp <= 0:
+			visual_unit.play_death_animation()
+		else:
+			visual_unit.play_hit_animation()
+
 	# ----- 发布伤害领域事件（含中间计算值）-----
 	if hp <= 0:
 		hp = 0

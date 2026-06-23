@@ -65,7 +65,13 @@ func _sort_combatants(units: Array[Combatant], is_next_round: bool = false) -> A
 	)
 	return active_units
 
-# Retrieve the next combatant who should act
+## 查看下一个行动者（不移除队列）
+func peek_next() -> Combatant:
+	if active_queue.is_empty():
+		return null
+	return active_queue[0]
+
+# Retrieve the next combatant who should act (removes from queue)
 func get_next_up() -> Combatant:
 	# Filter out any combatants that might have died mid-round
 	while not active_queue.is_empty():

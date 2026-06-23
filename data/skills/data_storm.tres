@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillConfig" format=3]
+
+[ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+skill_name = "数据风暴"
+description = "释放数据乱流随机攻击敌人 3 次。增幅提升伤害倍率。"
+damage_type = "digital"
+damage_multiplier = 0.5
+accuracy = 0.85
+hit_mode = "random"
+target_type = "random"
+random_hit_count = 3
+boost_limit = 3
+boost_effect = "damage"
+heat_generated = 15.0
+requires_target = true

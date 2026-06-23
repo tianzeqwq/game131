@@ -26,7 +26,6 @@ var enemy_party: Array[Combatant] = []
 var timeline: BattleTimeline = BattleTimeline.new()
 
 var current_actor: Combatant = null
-var selected_boost: int = 0
 var is_battle_active: bool = false
 var is_waiting_for_player: bool = false
 var round_number: int = 0
@@ -45,7 +44,6 @@ func run_round_loop() -> void:
 			break
 
 		round_number += 1
-		selected_boost = 0
 
 		# Round Start Phase
 		var all_units = player_party + enemy_party
@@ -56,10 +54,11 @@ func run_round_loop() -> void:
 		timeline.generate_timeline(all_units)
 
 		# Turn Cycle Phase
-		current_actor = timeline.get_next_up()
-
-		# 信号在队列和 current_actor 就绪后发出，确保 UI 能正确读取
+		# ★ 先用 peek_next() 查看第一个行动者（不移除队列），让 UI 能看到完整队列
+		current_actor = timeline.peek_next()
 		round_started.emit(round_number)
+		# ★ 再用 get_next_up() 真正弹出第一个行动者进入处理循环
+		current_actor = timeline.get_next_up()
 		while current_actor != null:
 			if current_actor.is_alive():
 				if current_actor.is_broken:
@@ -112,11 +111,8 @@ func _execute_enemy_ai(actor: Combatant) -> void:
 		if chosen_skill == null:
 			chosen_skill = skills[randi() % skills.size()]
 
-		match chosen_skill.damage_type:
-			"digital":
-				action = HackAction.new(actor, [target], chosen_skill)
-			_:
-				action = AttackAction.new(actor, [target], chosen_skill)
+		# 所有技能都通过统一的 AttackAction 执行（SkillConfig 决定伤害类型和效果）
+		action = AttackAction.new(actor, [target], chosen_skill)
 
 	var enemy_boost = 0
 	if actor.bp >= 3 and randf() < 0.4:

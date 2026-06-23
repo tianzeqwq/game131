@@ -3,98 +3,92 @@ extends RefCounted
 
 ## 玩家输入处理器
 ##
-## 职责：处理玩家按钮点击，创建对应的 CombatAction 并执行。
-## 从 Main.gd 提取，遵循单一职责原则。
+## 重构后：新增 assembler 引用，使 PlayerAction 可以协调动效（半隐退/推窗/飞离）
+##
+## 职责：管理玩家行动策略集合，负责初始化和分发菜单选择。
+## 使用策略模式（Strategy Pattern），每种操作由独立的 PlayerAction 子类实现。
 
-const SKILL_PANEL_PATH: String = "res://src/ui/skill_select_panel.tscn"
+## 可用的行动策略
+var _action_strategies: Dictionary = {}
+var _action_order: Array[String] = ["攻击", "技能", "防御"]
 
 var _battle_controller: BattleController
 var _hud: BattleHUD
 var _player_party: Array[Combatant]
 var _enemy_party: Array[Combatant]
 var _ui_root: Control
-var _selected_boost: int = 0
+var _assembler: BattleSceneAssembler  # 新增：用于动效协调
 
 
-func setup(controller: BattleController, hud: BattleHUD, player: Array[Combatant], enemy: Array[Combatant], ui_root: Control = null) -> void:
+func setup(
+	controller: BattleController,
+	hud: BattleHUD,
+	player: Array[Combatant],
+	enemy: Array[Combatant],
+	ui_root: Control = null,
+	assembler: BattleSceneAssembler = null
+) -> void:
 	_battle_controller = controller
 	_hud = hud
 	_player_party = player
 	_enemy_party = enemy
 	_ui_root = ui_root
+	_assembler = assembler
+	_register_default_strategies()
 
 
-func _get_default_enemy_target() -> Combatant:
-	for e in _enemy_party:
-		if e.is_alive():
-			return e
-	return null
+## 注册默认策略（攻击/技能/防御）
+func _register_default_strategies() -> void:
+	register_strategy(AttackPlayerAction.new())
+	register_strategy(SkillPlayerAction.new())
+	register_strategy(DefendPlayerAction.new())
 
 
-func _find_skill_by_type(combatant: Combatant, damage_type: String) -> SkillConfig:
-	for s in combatant.get_available_skills():
-		if s.damage_type == damage_type and s.heat_generated <= 0.0:
-			return s
-	return null
+## 注册一个行动策略
+func register_strategy(strategy: PlayerAction) -> void:
+	_action_strategies[strategy.get_action_name()] = strategy
 
 
-func _find_skill_by_heat(combatant: Combatant) -> SkillConfig:
-	for s in combatant.get_available_skills():
-		if s.heat_generated > 0.0:
-			return s
-	return null
+## 获取所有已注册的策略名称列表
+func get_available_action_names() -> Array[String]:
+	var names: Array[String] = []
+	for action_name in _action_order:
+		if _action_strategies.has(action_name):
+			names.append(action_name)
+	return names
 
 
-func _on_skill_pressed() -> void:
+## 获取当前角色的可用策略列表
+func get_available_actions(actor: Combatant) -> Array[PlayerAction]:
+	var available: Array[PlayerAction] = []
+	for action_name in _action_order:
+		if not _action_strategies.has(action_name):
+			continue
+		var strategy = _action_strategies[action_name] as PlayerAction
+		if strategy is SkillPlayerAction:
+			if actor.get_available_skills().is_empty():
+				continue
+		available.append(strategy)
+	return available
+
+
+## 执行指定的行动策略
+func execute_action(strategy: PlayerAction) -> bool:
 	if not _battle_controller.is_waiting_for_player or _battle_controller.current_actor == null:
-		return
+		return true
 
 	var actor = _battle_controller.current_actor
-	var skills = actor.get_available_skills()
-	if skills.is_empty():
-		_battle_controller.player_action_completed.emit()
-		return
 
-	# 创建并显示技能选择面板
-	var panel = load(SKILL_PANEL_PATH).instantiate()
-	_ui_root.add_child(panel)
-	panel.show_for(skills, actor.bp, actor.stats.max_bp, actor.stats.unit_name)
+	# 将 assembler 引用注入策略
+	if strategy.has_method("set_assembler"):
+		strategy.set_assembler(_assembler)
 
-	# 增幅变化时实时更新 HUD 上的 BP 预览（面板 ×N = 消耗 N-1）
-	panel.boost_changed.connect(func(bl):
-		var cost = bl - 1
-		_hud.show_boost_preview(actor, cost)
-	)
-
-	# 等待面板关闭（用户确认或取消）
-	await panel.closed
-
-	# 从面板读取结果（面板内存有效，因为我们还没 queue_free）
-	var chosen_skill = panel.last_selected_skill
-	var boost_level = panel.last_boost_level
-	var was_cancelled = panel.was_cancelled
-
-	panel.queue_free()
-
-	if was_cancelled or chosen_skill == null:
-		_battle_controller.player_action_completed.emit()
-		return
-
-	var target = _get_default_enemy_target()
-	if target == null:
-		_battle_controller.player_action_completed.emit()
-		return
-
-	# 面板显示 ×N 对应实际消耗 N-1（×1=消耗0, ×2=消耗1...）
-	var actual_boost = boost_level - 1
-	var action = SkillAction.new(actor, [target], chosen_skill)
-	await _execute_and_complete(action, actual_boost)
+	var completed = await strategy.execute(actor, _battle_controller, _hud, _ui_root, _player_party, _enemy_party)
+	return completed
 
 
-func _execute_and_complete(action: CombatAction, boost_level: int = -1) -> void:
-	var bl = boost_level if boost_level >= 0 else _selected_boost
-	await action.execute(bl)
-	_selected_boost = 0
-	# 强制刷新 HUD，确保 BP 圆点和血条反映最新状态
+## 直接执行行动并完成
+func _execute_and_complete(action: CombatAction, boost_level: int = 0) -> void:
+	await action.execute(boost_level)
 	_hud.update_all()
 	_battle_controller.player_action_completed.emit()

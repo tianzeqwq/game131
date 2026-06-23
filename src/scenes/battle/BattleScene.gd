@@ -27,6 +27,12 @@ var _assembler: BattleSceneAssembler
 @onready var _enemy_spawns: Node3D = $Stage/EnemySpawns
 
 
+# Idle Sway 暂时屏蔽
+#func _process(delta: float) -> void:
+#	if _assembler != null:
+#		_assembler.update_camera_idle_sway(delta)
+
+
 func init_battle(player_stats: Array[CharacterStats], enemy_stats: Array[CharacterStats]) -> void:
 	_assemble(player_stats, enemy_stats)
 

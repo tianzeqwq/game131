@@ -1,45 +1,13 @@
 class_name HackAction
-extends CombatAction
+extends AttackAction
 
-## 数字黑客攻击行动
+## ⚠️ HackAction 已废弃，统一使用 AttackAction
 ##
-## 使用 DamageCalculator 计算每段伤害。
-## 段数 = 1 + boost_level，伤害类型为 "digital"。
-## 可通过构造函数注入 SkillConfig 自定义参数；若不传则使用默认值。
+## HackAction 与 AttackAction 的逻辑完全重复，唯一的区别是默认伤害类型。
+## AttackAction 已支持通过 SkillConfig.damage_type 指定伤害类型，
+## 因此 HackAction 不再需要独立的实现。
+##
+## 保留此文件仅用于向后兼容，所有新代码请直接使用 AttackAction。
 
-## 技能配置（可选，不传则使用默认参数）
-var skill_config: SkillConfig
-
-## 构造函数注入（可选）
 func _init(p_executor: Combatant, p_targets: Array[Combatant], p_config: SkillConfig = null) -> void:
-	super(p_executor, p_targets)
-	skill_config = p_config
-
-func _apply_effect(boost_level: int) -> void:
-	if targets.is_empty(): return
-	var target = targets[0]
-
-	if executor.visual_unit:
-		executor.visual_unit.play_attack_animation()
-
-	var hits = 1 + boost_level
-	var bp_mult = DamageCalculator.BP_MULTIPLIERS[boost_level] if boost_level < DamageCalculator.BP_MULTIPLIERS.size() else 1.0
-
-	var skill_mult = skill_config.damage_multiplier if skill_config else 0.8
-	var skill_acc = skill_config.accuracy if skill_config else 0.90
-	var dmg_type = skill_config.damage_type if skill_config else "digital"
-
-	for i in range(hits):
-		if not target.is_alive():
-			break
-
-		var ctx = DamageContext.new(
-			executor, target, dmg_type,
-			skill_mult, skill_acc, bp_mult
-		)
-		var result = DamageCalculator.calculate(ctx)
-
-		target.take_damage(result, dmg_type, executor.stats.unit_name)
-
-		if hits > 1 and i < hits - 1:
-			await executor.visual_unit.get_tree().create_timer(0.2).timeout
+	super(p_executor, p_targets, p_config)

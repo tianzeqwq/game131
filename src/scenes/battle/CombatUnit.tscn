@@ -5,7 +5,7 @@
 [node name="CombatUnit" type="Node3D"]
 script = ExtResource("1_script")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 billboard = 1
 shaded = false
 texture_filter = 0

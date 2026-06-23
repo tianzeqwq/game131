@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SkillConfig" format=3]
+
+[ext_resource type="Script" uid="uid://bsh6vvsi4qo84" path="res://src/data/skills/skill_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+skill_name = "病毒扩散"
+description = "释放病毒感染所有敌人。增幅提升伤害倍率。"
+damage_type = "digital"
+damage_multiplier = 0.6
+accuracy = 0.85
+hit_mode = "single"
+target_type = "all_enemies"
+random_hit_count = 1
+boost_limit = 3
+boost_effect = "damage"
+heat_generated = 10.0
+requires_target = true

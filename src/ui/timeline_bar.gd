@@ -39,13 +39,13 @@ func _clear_container() -> void:
 		container.remove_child(child)
 		child.queue_free()
 
-## 添加单个头像槽位
+## 添加单个头像槽位（使用 avatar 纹理）
 func _add_avatar(combatant: Combatant) -> void:
 	var slot = TextureRect.new()
 	slot.custom_minimum_size = Vector2(AVATAR_SIZE, AVATAR_SIZE)
 	slot.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	
-	# 使用专门的 avatar 头像图标（区别于 idle_sprite 3D 贴图）
+	# 使用 avatar 纹理（由 actor 配置指向对应的精灵帧图片）
 	if combatant.stats and combatant.stats.avatar:
 		slot.texture = combatant.stats.avatar
 	
